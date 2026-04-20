@@ -8,17 +8,17 @@ namespace OrderFlow.Controllers {
     [ApiController]
     [Route("api/orders")]
     public class OrdersController : ControllerBase {
-        private OrderService takeOrder;
+        private readonly OrderService _orderService;
 
 
-        public OrdersController(OrderService _orderService) {
-            takeOrder = _orderService;
+        public OrdersController(OrderService orderService) {
+            _orderService = orderService;
         }
 
         [HttpGet()]
         public IActionResult GetOrders() {
 
-            var showMainOrder = takeOrder.ReturnOrderList();
+            var showMainOrder = _orderService.ReturnOrderList();
 
             return Ok(showMainOrder);
         }

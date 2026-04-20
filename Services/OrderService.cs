@@ -11,16 +11,13 @@ namespace OrderFlow.Services {
                  new Order {
                      Id = 1,
                      CustomerName = "Monroe",
-                     TotalAmount = 10m
                  },
                  new Order {
                      Id = 2,
                      CustomerName = "Stevesson",
-                     TotalAmount = 15m
                  }, new Order {
                      Id = 3,
                      CustomerName = "Thompson",
-                     TotalAmount = 7m
                  }
             };
 
