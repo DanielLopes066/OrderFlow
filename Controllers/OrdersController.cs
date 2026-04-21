@@ -16,11 +16,23 @@ namespace OrderFlow.Controllers {
         }
 
         [HttpGet()]
-        public IActionResult GetOrders() {
+        public IActionResult GetAllOrders() {
 
-            var showMainOrder = _orderService.ReturnOrderList();
+            var createdOrder = _orderService.GetAllOrders();
 
-            return Ok(showMainOrder);
+            return Ok(createdOrder);
+        }
+
+
+        [HttpPost()]
+        public IActionResult CreateOrder(Order order) {
+
+            try {
+                var showMainOrder = _orderService.CreateOrder(order);
+                return Ok(showMainOrder);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

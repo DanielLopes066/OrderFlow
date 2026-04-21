@@ -1,27 +1,27 @@
-﻿using OrderFlow.Models;
+﻿using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Http.HttpResults;
+using OrderFlow.Models;
 
 namespace OrderFlow.Services {
 
     public class OrderService {
 
-        public List<Order> ReturnOrderList() {
+        private static readonly List<Order> _orders = new List<Order>();
 
-            var ordersList = new List<Order>() {
+        public List<Order> GetAllOrders() {
+            return _orders;
+        }
 
-                 new Order {
-                     Id = 1,
-                     CustomerName = "Monroe",
-                 },
-                 new Order {
-                     Id = 2,
-                     CustomerName = "Stevesson",
-                 }, new Order {
-                     Id = 3,
-                     CustomerName = "Thompson",
-                 }
-            };
+        public Order CreateOrder(Order order) {
 
-            return ordersList;
+            if (order.OrderItems == null || order.OrderItems.Count == 0) {
+                throw new Exception("Pedido deve ter pelo menos um item");
+            }
+
+            order.Id = _orders.Count + 1;
+            order.Status = OrderStatus.Pending;
+            _orders.Add(order);
+            return order;
         }
     }
 }
