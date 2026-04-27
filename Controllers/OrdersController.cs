@@ -19,7 +19,6 @@ namespace OrderFlow.Controllers {
         public IActionResult GetAllOrders() {
 
             var createdOrder = _orderService.GetAllOrders();
-
             return Ok(createdOrder);
         }
 
@@ -32,6 +31,16 @@ namespace OrderFlow.Controllers {
                 return Ok(showMainOrder);
             } catch (Exception ex) {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult LocateOrder(int id) {
+            try {
+                var order = _orderService.LocateOrder(id);
+                return Ok(order);
+            } catch(Exception ex) {
+                return NotFound(ex.Message);
             }
         }
     }

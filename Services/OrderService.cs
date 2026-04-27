@@ -23,5 +23,15 @@ namespace OrderFlow.Services {
             _orders.Add(order);
             return order;
         }
+
+        public Order LocateOrder (int id) {
+
+            var order = _orders.FirstOrDefault(p => p.Id == id);
+
+            if(order == null) {
+                throw new Exception("Pedido não encontrado");
+            }
+             return order;
+        } 
     }
 }
